@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-/**
- * Main
+/*
+ * Neil Elkadi - CEN 3024C - 09/08/2024
+ * Software Development 1
+ * Entry point class. This program manages a library's collection of books.
+ * It is a menu driven program that takes standard input for commands and reads new book entries from a file.
  */
 public class Main {
   private static Scanner scanner = new Scanner(System.in);
@@ -24,6 +27,11 @@ public class Main {
     menu();
   }
 
+  /**
+   * menu
+   * A repeating function that ends when the user quits. This is where all other
+   * functions get called from.
+   */
   static void menu() {
     printMenuOptions();
     System.out.print("\nWhat action will you preform?: ");
@@ -64,6 +72,10 @@ public class Main {
     menu();
   }
 
+  /**
+   * printMenuOptions
+   * Displays all options a user can provide during a menu prompt.
+   */
   static void printMenuOptions() {
     System.out.println("[A]dd book from file");
     System.out.println("[R]emove book by id");

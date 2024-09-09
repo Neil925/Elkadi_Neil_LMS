@@ -7,13 +7,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-/**
- * Book
+/*
+ * Neil Elkadi - CEN 3024C - 09/08/2024
+ * Software Development 1
+ * This class acts as a record class for Book information as well as a container for all book and books array related actions.
  */
 public class Book {
   private static ArrayList<Book> books = new ArrayList<Book>();
   public static final String importFile = "./import_file.txt";
 
+  /**
+   * printAll
+   * Prints all book records that are held in the {@code books}.
+   */
   public static void printAll() {
     if (books.size() == 0) {
       System.out.println("No books present.");
@@ -26,6 +32,10 @@ public class Book {
       System.out.println(book);
   }
 
+  /**
+   * addBook
+   * Adds all books from CWD/import_file.txt to the {@code books} array list.
+   */
   public static void addBook() {
     try {
       File file = new File(importFile);
@@ -66,6 +76,12 @@ public class Book {
     }
   }
 
+  /**
+   * removeBook
+   * Removes a book from {@code books} by id.
+   * 
+   * @param id The id field of the book to be removed.
+   */
   public static void removeBook(int id) {
     Book book = null;
     for (int i = 0; i < books.size(); i++) {
