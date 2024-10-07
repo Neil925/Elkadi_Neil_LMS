@@ -1,13 +1,13 @@
 # EXAMPLE:
-# 1505, My Book, Neil Elkadi
+# 1505, My Book, Neil Elkadi, Thriller
 
-1001, The Great Gatsby, F. Scott Fitzgerald
-1002, 1984, George Orwell
-1003, To Kill a Mockingbird, Harper Lee
-1004, Moby-Dick, Herman Melville
-1005, Pride and Prejudice, Jane Austen
-1006, The Catcher in the Rye, J.D. Salinger
-1007, War and Peace, Leo Tolstoy
-1008, The Hobbit, J.R.R. Tolkien
-1009, Crime and Punishment, Fyodor Dostoevsky
-1010, Ulysses, James Joyce
+1001, The Great Gatsby, F. Scott Fitzgerald, Action
+1002, 1984, George Orwell, Horror
+1003, To Kill a Mockingbird, Harper Lee, Drama
+1004, Moby-Dick, Herman Melville, Historical
+1005, Pride and Prejudice, Jane Austen, Adventure
+1006, The Catcher in the Rye, J.D. Salinger, Biography
+1007, War and Peace, Leo Tolstoy, Drama
+1008, The Hobbit, J.R.R. Tolkien, Horror
+1009, Crime and Punishment, Fyodor Dostoevsky, Action
+1010, Ulysses, James Joyce, Family
