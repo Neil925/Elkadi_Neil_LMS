@@ -11,7 +11,7 @@ import java.util.Scanner;
  * This class acts as a record class for Book information.
  */
 public class Library {
-  private static ArrayList<Book> database = new ArrayList<Book>();
+  public static ArrayList<Book> database = new ArrayList<Book>();
   public static String importFile;
 
   /**
@@ -57,16 +57,10 @@ public class Library {
         String title = items[2].trim();
         String genre = items[3].trim();
 
-        Book book = new Book(id, author, title, genre);
-
-        if (database.stream().anyMatch(x -> x.getBarcodeId() == book.getBarcodeId())) {
-          System.err.println("A book with the id " + book.getBarcodeId() + " already exists!");
+        if (!addBook(id, author, title, genre)) {
+          System.err.println("A book with the id " + id + " already exists!");
           continue;
         }
-
-        database.add(book);
-
-        System.out.println("Added " + book);
       }
 
       System.out.println("All actions complete.");
@@ -75,6 +69,20 @@ public class Library {
           "Something went wrong when adding books. Please make sure " + importFile + " is formatted coorectly.");
       System.err.println(e);
     }
+  }
+
+  public static boolean addBook(int id, String author, String title, String genre) {
+    Book book = new Book(id, author, title, genre);
+
+    if (database.stream().anyMatch(x -> x.getBarcodeId() == book.getBarcodeId())) {
+      System.err.println("A book with the id " + book.getBarcodeId() + " already exists!");
+      return false;
+    }
+
+    database.add(book);
+    System.out.println("Added " + book);
+
+    return true;
   }
 
   /**
