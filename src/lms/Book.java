@@ -80,6 +80,10 @@ public class Book {
     return dueDate;
   }
 
+  public boolean isCheckedOut() {
+    return dueDate != null;
+  }
+
   public void setDueDate(Date dueDate) {
     this.dueDate = dueDate;
   }
@@ -89,13 +93,13 @@ public class Book {
     String result = "" + this.barcodeId;
     result += " - " + this.title;
     result += " by " + this.author;
-    result += "\n\tGenre: " + this.genre;
-    result += "\n\tStatus: ";
-    if (this.status == 'C') {
-      result += "Checked out";
-      result += "\n\tDue: " + this.dueDate;
-    } else
-      result += "Available";
+//    result += "\n\tGenre: " + this.genre;
+//    result += "\n\tStatus: ";
+//    if (this.status == 'C') {
+//      result += "Checked out";
+//      result += "\n\tDue: " + this.dueDate;
+//    } else
+//      result += "Available";
 
     return result;
   }

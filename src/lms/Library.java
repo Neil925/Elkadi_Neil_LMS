@@ -3,6 +3,7 @@ package lms;
 import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 /*
@@ -19,7 +20,7 @@ public class Library {
    * Prints all book records that are held in the {@code database}.
    */
   public static void printAll() {
-    if (database.size() == 0) {
+    if (database.isEmpty()) {
       System.out.println("No books present.");
       return;
     }
@@ -50,7 +51,7 @@ public class Library {
         if (!line.matches(".*,.*,.*,.*"))
           continue;
 
-        String items[] = line.split(",");
+        String[] items = line.split(",");
 
         int id = Integer.parseInt(items[0].trim());
         String author = items[1].trim();
@@ -71,6 +72,15 @@ public class Library {
     }
   }
 
+  /**
+   * addBook
+   * Adds a new book entry to the library database if the barcode ID does not already exist.
+   * @param id The unique barcode ID for the book.
+   * @param author The author's name.
+   * @param title The title of the book.
+   * @param genre The genre or category of the book.
+   * @return true if the book was added successfully, false if the book ID already exists.
+   */
   public static boolean addBook(int id, String author, String title, String genre) {
     Book book = new Book(id, author, title, genre);
 
@@ -86,19 +96,51 @@ public class Library {
   }
 
   /**
+   * getBook
+   * Retrieves a book from {@code database} by title.
+   * @param title The title field of the book to be retrieved.
+   * @return The book if found, or null otherwise.
+   */
+  public static Book getBook(String title) {
+    for (Book value : database) {
+      if (Objects.equals(value.getTitle(), title)) {
+        return value;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * getBook
+   * Retrieves a book from {@code database} by id.
+   * @param id The id field of the book to be retrieved.
+   * @return The book if found, or null otherwise.
+   */
+  public static Book getBook(int id) {
+    for (Book value : database) {
+      if (value.getBarcodeId() == id) {
+        return value;
+      }
+    }
+
+    return null;
+  }
+
+  /**
    * removeBook
    * Removes a book from {@code database} by id.
-   * 
+   *
    * @param id The id field of the book to be removed.
    */
   public static void removeBook(int id) {
     Book book = null;
-    for (int i = 0; i < database.size(); i++) {
-      if (database.get(i).getBarcodeId() == id) {
-        book = database.get(i);
-        break;
+      for (Book value : database) {
+          if (value.getBarcodeId() == id) {
+              book = value;
+              break;
+          }
       }
-    }
 
     if (book == null) {
       System.err.println("No book with matching id " + id + " was found. Nothing removed.");
@@ -117,12 +159,12 @@ public class Library {
    */
   public static void removeBook(String title) {
     Book book = null;
-    for (int i = 0; i < database.size(); i++) {
-      if (database.get(i).getTitle().equals(title)) {
-        book = database.get(i);
-        break;
+      for (Book value : database) {
+          if (value.getTitle().equals(title)) {
+              book = value;
+              break;
+          }
       }
-    }
 
     if (book == null) {
       System.err.println("No book with matching title" + title + " was found. Nothing removed.");
@@ -139,23 +181,24 @@ public class Library {
    * 
    * @param title The title field of the book to be checked out.
    */
-  public static void checkoutBook(String title) {
+  public static boolean checkoutBook(String title) {
     for (Book book : database) {
       if (!book.getTitle().equals(title))
         continue;
 
       if (book.getStatus() == 'C') {
         System.out.println("Book is already checked out!");
-        return;
+        return false;
       }
 
       book.setStatus('C');
       book.setDueDate(new Date(System.currentTimeMillis() + (1000 * 60 * 60 * 24 * 7)));
       System.out.println("Book checked out successfully.");
-      return;
+      return true;
     }
 
     System.out.println("No book with title \"" + title + "\" was found.");
+    return false;
   }
 
   /**
@@ -164,22 +207,23 @@ public class Library {
    * 
    * @param title The title field of the book to be checked in.
    */
-  public static void checkinBook(String title) {
+  public static boolean checkinBook(String title) {
     for (Book book : database) {
       if (!book.getTitle().equals(title))
         continue;
 
       if (book.getStatus() == 'A') {
         System.out.println("Book is already checked in!");
-        return;
+        return false;
       }
 
       book.setStatus('A');
       book.setDueDate(null);
       System.out.println("Book checked in successfully.");
-      return;
+      return true;
     }
 
     System.out.println("No book with title \"" + title + "\" was found.");
+    return false;
   }
 }

@@ -27,7 +27,8 @@ public class Main {
     }
 
     Library.addBook();
-    menu();
+
+    new LibraryManager();
   }
 
   /**
@@ -35,59 +36,59 @@ public class Main {
    * A repeating function that ends when the user quits. This is where all other
    * functions get called from.
    */
-  static void menu() {
-    printMenuOptions();
-    System.out.print("\nWhat action will you preform?: ");
-    char input = scanner.nextLine().toLowerCase().charAt(0);
-    String title;
-
-    switch (input) {
-      case 'a':
-        Library.addBook();
-        System.out.println();
-        break;
-      case 'r':
-        System.out.print("Enter the barcodeId for the book you'd like to remove: ");
-        try {
-          int id = scanner.nextInt();
-          scanner.nextLine();
-          Library.removeBook(id);
-        } catch (Exception er) {
-          System.err.println("Must be a number!");
-        }
-        Library.printAll();
-        break;
-      case 'o':
-        System.out.print("Enter the title of the book you'd like to check out: ");
-        title = scanner.nextLine();
-        Library.checkoutBook(title);
-        Library.printAll();
-        break;
-      case 'i':
-        System.out.print("Enter the title of the book you'd like to check in: ");
-        title = scanner.nextLine();
-        Library.checkinBook(title);
-        Library.printAll();
-        break;
-      case 'l':
-        System.out.println();
-        Library.printAll();
-        System.out.println();
-        break;
-      case 'q':
-        System.out.print("This action is irreversible and will wipe current library content. Are you sure? (y/N): ");
-        if (scanner.nextLine().toLowerCase().charAt(0) == 'y') {
-          System.out.println("Goodbye.");
-          return;
-        }
-        break;
-      default:
-        System.err.println("Invalid input. Please try again.");
-        break;
-    }
-
-    menu();
-  }
+//  static void menu() {
+//    printMenuOptions();
+//    System.out.print("\nWhat action will you preform?: ");
+//
+////    char input = scanner.nextLine().toLowerCase().charAt(0);
+////    String title;
+////    switch (input) {
+////      case 'a':
+////        Library.addBook();
+////        System.out.println();
+////        break;
+////      case 'r':
+////        System.out.print("Enter the barcodeId for the book you'd like to remove: ");
+////        try {
+////          int id = scanner.nextInt();
+////          scanner.nextLine();
+////          Library.removeBook(id);
+////        } catch (Exception er) {
+////          System.err.println("Must be a number!");
+////        }
+////        Library.printAll();
+////        break;
+////      case 'o':
+////        System.out.print("Enter the title of the book you'd like to check out: ");
+////        title = scanner.nextLine();
+////        Library.checkoutBook(title);
+////        Library.printAll();
+////        break;
+////      case 'i':
+////        System.out.print("Enter the title of the book you'd like to check in: ");
+////        title = scanner.nextLine();
+////        Library.checkinBook(title);
+////        Library.printAll();
+////        break;
+////      case 'l':
+////        System.out.println();
+////        Library.printAll();
+////        System.out.println();
+////        break;
+////      case 'q':
+////        System.out.print("This action is irreversible and will wipe current library content. Are you sure? (y/N): ");
+////        if (scanner.nextLine().toLowerCase().charAt(0) == 'y') {
+////          System.out.println("Goodbye.");
+////          return;
+////        }
+////        break;
+////      default:
+////        System.err.println("Invalid input. Please try again.");
+////        break;
+////    }
+//
+//    menu();
+//  }
 
   /**
    * printMenuOptions
