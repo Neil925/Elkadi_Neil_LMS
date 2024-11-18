@@ -25,15 +25,15 @@ public class LibraryManager extends JFrame {
     private JLabel authorLabel;
     private JLabel genreLabel;
     private JLabel warningLabel;
-    private JButton checkInButton;
-    private JButton checkOutButton;
+    private JButton checkInOutButton;
+    private JButton deleteBookButton;
 
     /**
      * LibraryManager Constructor
      * Initializes the GUI components, sets the JFrame properties, and attaches listeners to handle actions.
      */
     public LibraryManager() {
-        bookList.setListData(Library.database.toArray());
+        bookList.setListData(Database.getBooks().toArray());
         setTitle("Book Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(contentPane);
@@ -46,6 +46,7 @@ public class LibraryManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 searchBookId();
+                resetBookList();
             }
         });
 
@@ -53,31 +54,38 @@ public class LibraryManager extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setFields(Library.getBook(bookTitleTextField.getText()));
+                resetBookList();
             }
         });
 
-        checkInButton.addActionListener(new ActionListener() {
+        checkInOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!Library.checkinBook(bookTitleTextField.getText()))
-                    JOptionPane.showMessageDialog(new JFrame(), "Could not check in.", "Warning", JOptionPane.ERROR_MESSAGE);
+                if (!Library.toggleStatus(bookTitleTextField.getText()))
+                    JOptionPane.showMessageDialog(new JFrame(), "Could not edit book.", "Warning", JOptionPane.ERROR_MESSAGE);
                 setFields(Library.getBook(bookTitleTextField.getText()));
+                resetBookList();
             }
         });
 
-        checkOutButton.addActionListener(new ActionListener() {
+        deleteBookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!Library.checkoutBook(bookTitleTextField.getText()))
-                    JOptionPane.showMessageDialog(new JFrame(), "Could not check out.", "Warning", JOptionPane.ERROR_MESSAGE);
-                setFields(Library.getBook(bookTitleTextField.getText()));
+                try {
+                    Library.removeBook(bookTitleTextField.getText());
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Could not edit book.", "Warning", JOptionPane.ERROR_MESSAGE);
+                    System.out.println(ex.getMessage());
+                }
+
+                resetBookList();
             }
         });
 
         bookList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting()) return;
+                if (e.getValueIsAdjusting() || refresh) return;
 
                 setFields((Book) bookList.getSelectedValue());
             }
@@ -90,6 +98,21 @@ public class LibraryManager extends JFrame {
     }
 
     /**
+     * resetBookList
+     * Resets the book list that can be viewed in the JList within the scroll pane.
+     */
+    private void resetBookList() {
+        refresh = true;
+        bookList.clearSelection();
+        bookList.setListData(Database.getBooks().toArray());
+        bookList.setSelectedIndex(0);
+        setFields((Book) bookList.getSelectedValue());
+        refresh = false;
+    }
+
+    private boolean refresh = false;
+
+    /**
      * searchBookId
      * Searches for a book by ID from the text field input and displays its details in the GUI.
      */
@@ -98,7 +121,7 @@ public class LibraryManager extends JFrame {
             int id = Integer.parseInt(bookIDTextField.getText());
             setFields(Library.getBook(id));
         } catch (Exception error) {
-            System.out.println(error);
+            System.out.println(error.getMessage());
         }
     }
 
@@ -106,6 +129,7 @@ public class LibraryManager extends JFrame {
      * setFields
      * Updates the GUI fields with the details of the given book, including title, author, genre, due date,
      * and check-out status.
+     *
      * @param book The book to display in the fields, or null if the book was not found.
      */
     private void setFields(Book book) {
@@ -133,8 +157,4 @@ public class LibraryManager extends JFrame {
             isCheckedOutBox.setEnabled(false);
         }
     }
-
-//    private void setBook(String title) {
-//        Library.
-//    }
 }

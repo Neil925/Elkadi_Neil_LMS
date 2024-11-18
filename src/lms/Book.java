@@ -36,6 +36,12 @@ public class Book {
     setDueDate(null);
   }
 
+  public Book(int id, String author, String title, String genre, char status, Date dueDate) {
+    this(id, author, title, genre);
+    setStatus(status);
+    setDueDate(dueDate);
+  }
+
   public int getBarcodeId() {
     return barcodeId;
   }

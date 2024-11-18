@@ -212,24 +212,14 @@
           </component>
         </children>
       </scrollpane>
-      <component id="c05fc" class="javax.swing.JButton" binding="checkOutButton" default-binding="true">
+      <component id="c05fc" class="javax.swing.JButton" binding="checkInOutButton">
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="30" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <text value="check out"/>
-        </properties>
-      </component>
-      <component id="3baaf" class="javax.swing.JButton" binding="checkInButton" default-binding="true">
-        <constraints>
-          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="30" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="check in"/>
+          <text value="check in/out"/>
         </properties>
       </component>
       <vspacer id="3960f">
@@ -237,6 +227,16 @@
           <grid row="15" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
+      <component id="73763" class="javax.swing.JButton" binding="deleteBookButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="3" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4914176"/>
+          <hideActionText value="false"/>
+          <text value="Delete Book"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
