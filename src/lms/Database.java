@@ -3,34 +3,38 @@ package lms;
 import java.sql.*;
 import java.util.ArrayList;
 
-/*
- * Neil Elkadi - CEN 3024C - 11/17/2024
- * Software Development 1
+/**
  * This class provides methods for interacting with the database to manage books in the library.
  * It includes setup, book retrieval, addition, removal, and status updating.
+ *
+ * @author Neil Elkadi
+ * @version 1.0.0 11/17/2024
  */
 public class Database {
     public static Connection connection;
 
     /**
-     * setupDatabase
      * Establishes a connection to the SQLite database using the provided database URL.
      * This method must be called before any database operations are performed.
+     *
+     * @return the success status of the database connection.
      */
-    public static void setupDatabase() {
+    public static boolean setupDatabase() {
         String url = "jdbc:sqlite:library.db";
         try {
             connection = DriverManager.getConnection(url);
+            return true;
         } catch (SQLException error) {
             System.out.println("There was an error with setting up the database.");
-            System.out.println(error);
+            System.out.println(error.getMessage());
+            return false;
         }
     }
 
     /**
-     * getBooks
      * Retrieves all books stored in the database.
      * Each book's details are read from the database and added to an ArrayList.
+     *
      * @return an ArrayList containing all books found in the database.
      */
     public static ArrayList<Book> getBooks() {
@@ -68,9 +72,9 @@ public class Database {
     }
 
     /**
-     * addBook
      * Adds a new book to the database.
      * If the insertion is successful, it returns true; otherwise, false is returned.
+     *
      * @param book the book to be added to the database.
      * @return true if the book was added successfully, false otherwise.
      */
@@ -99,16 +103,16 @@ public class Database {
     }
 
     /**
-     * removeBook (by author)
-     * Removes all books by a specific author from the database.
-     * @param author the author whose books should be removed.
-     * @return true if the book(s) were removed successfully, false otherwise.
+     * Removes a book with the specified title from the database.
+     *
+     * @param title the title of the book that should be removed.
+     * @return true if the book was removed successfully, false otherwise.
      */
-    public static boolean removeBook(String author) {
-        String sql = "DELETE FROM books WHERE author = ?";
+    public static boolean removeBook(String title) {
+        String sql = "DELETE FROM books WHERE title = ?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, author);
+            pstmt.setString(1, title);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -118,8 +122,8 @@ public class Database {
     }
 
     /**
-     * removeBook (by barcode_id)
      * Removes a book by its barcode_id from the database.
+     *
      * @param id the barcode_id of the book to be removed.
      * @return true if the book was removed successfully, false otherwise.
      */
@@ -137,9 +141,9 @@ public class Database {
     }
 
     /**
-     * setStatus
      * Updates the status and due date of a book in the database.
      * If the book is checked out, the due date will be updated.
+     *
      * @param book the book whose status and due date should be updated.
      * @return true if the update was successful, false otherwise.
      */

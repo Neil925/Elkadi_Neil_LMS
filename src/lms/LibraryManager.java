@@ -6,12 +6,13 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
- * Neil Elkadi - CEN 3024C - 10/30/2024
- * Software Development 1
+/**
  * This class handles the user interaction for library operations, providing a GUI with options to add,
  * remove, check out, and check in books. LibraryManager makes calls to the Library class to perform
  * operations based on user input.
+ *
+ * @author Neil Elkadi
+ * @version 1.0.0 10/30/2024
  */
 public class LibraryManager extends JFrame {
     private JPanel contentPane;
@@ -29,7 +30,7 @@ public class LibraryManager extends JFrame {
     private JButton deleteBookButton;
 
     /**
-     * LibraryManager Constructor
+     * LibraryManager Constructor.
      * Initializes the GUI components, sets the JFrame properties, and attaches listeners to handle actions.
      */
     public LibraryManager() {
@@ -98,7 +99,6 @@ public class LibraryManager extends JFrame {
     }
 
     /**
-     * resetBookList
      * Resets the book list that can be viewed in the JList within the scroll pane.
      */
     private void resetBookList() {
@@ -113,7 +113,6 @@ public class LibraryManager extends JFrame {
     private boolean refresh = false;
 
     /**
-     * searchBookId
      * Searches for a book by ID from the text field input and displays its details in the GUI.
      */
     private void searchBookId() {
@@ -126,7 +125,6 @@ public class LibraryManager extends JFrame {
     }
 
     /**
-     * setFields
      * Updates the GUI fields with the details of the given book, including title, author, genre, due date,
      * and check-out status.
      *

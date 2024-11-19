@@ -6,15 +6,15 @@ import java.sql.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
-/*
- * Neil Elkadi - CEN 3024C - 10/06/2024
- * Software Development 1
- * This class acts as a record class for Book information.
+/**
+ * Contains core library logic. Includes book removals, additions, check out, check in, and getting book.
+ *
+ * @author Neil Elkadi
+ * @version 1.0.0 11/19/2024
  */
 public class Library {
     /**
-     * printAll
-     * Prints all book records that are held in the {@code database}.
+     * Prints all book records that are held in the database.
      */
     public static void printAll() {
         var database = Database.getBooks();
@@ -31,9 +31,7 @@ public class Library {
     }
 
     /**
-     * addBook
      * Adds a random set of books for testing.
-     * list.
      */
     public static void addBooks() {
         Database.addBook(new Book(1001, "J.K. Rowling", "Harry Potter and the Sorcerer's Stone", "Fantasy", 'C', new Date(1731899260538L)));
@@ -61,7 +59,6 @@ public class Library {
     }
 
     /**
-     * addBook
      * Adds a new book entry to the library database if the barcode ID does not already exist.
      *
      * @param id     The unique barcode ID for the book.
@@ -87,8 +84,7 @@ public class Library {
     }
 
     /**
-     * getBook
-     * Retrieves a book from {@code database} by title.
+     * Retrieves a book from the database by title.
      *
      * @param title The title field of the book to be retrieved.
      * @return The book if found, or null otherwise.
@@ -106,8 +102,7 @@ public class Library {
     }
 
     /**
-     * getBook
-     * Retrieves a book from {@code database} by id.
+     * Retrieves a book from database by id.
      *
      * @param id The id field of the book to be retrieved.
      * @return The book if found, or null otherwise.
@@ -125,8 +120,7 @@ public class Library {
     }
 
     /**
-     * removeBook
-     * Removes a book from {@code database} by id.
+     * Removes a book from database by id.
      *
      * @param id The id field of the book to be removed.
      */
@@ -151,8 +145,7 @@ public class Library {
     }
 
     /**
-     * removeBook
-     * Overload that Removes a book from {@code database} by title.
+     * Overload that Removes a book from database by title.
      *
      * @param title The title field of the book to be removed.
      */
@@ -177,8 +170,7 @@ public class Library {
     }
 
     /**
-     * checkoutBook
-     * Marks a book as being checked out in {@code database} by title.
+     * Marks a book as being checked out in database by title.
      *
      * @param title The title field of the book to be checked out.
      */
@@ -211,8 +203,7 @@ public class Library {
     }
 
     /**
-     * checkinBook
-     * Marks a book as being checked in for the {@code database} array by title.
+     * Marks a book as being checked in for the database array by title.
      *
      * @param title The title field of the book to be checked in.
      */
